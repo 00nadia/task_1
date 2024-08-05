@@ -78,3 +78,4 @@ To clean the database, just remove the `db.sqlite3` files inside `system` folder
 - Svelte Form Actions: https://kit.svelte.dev/docs/form-actions
 - Go By Example: https://gobyexample.com/
 - Go Tour: https://go.dev/tour/welcome/1
+# task_1
