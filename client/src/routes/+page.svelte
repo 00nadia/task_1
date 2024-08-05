@@ -10,24 +10,25 @@
     onMount(() => {
         ScrollTrigger.refresh();
         for (let i = 0; i < data.recommended.data.length; i++) {
-            gsap.from(`#anime-${i}`, {
-                x: i % 2 === 0 ? 200 : -200,
-                opacity: 0,
-                duration: 3,
-                ease: "power4.out",
-                scrollTrigger: {
-                    trigger: `#anime-${i}`,
-                    start: "top 80%",
-                },
-            });
+            // gsap.from(`#anime-${i}`, {
+            //     x: i % 2 === 0 ? 200 : -200,
+            //     opacity: 0,
+            //     duration: 3,
+            //     ease: "power4.out",
+            //     scrollTrigger: {
+            //         trigger: `#anime-${i-1}`,
+            //         start: "top 80%",
+            //     },
+            // });
         }
         loading = false;
     });
+
 </script>
 
 {#if loading}
     <div
-        class="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-gray-900"
+        class="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-red-900"
     >
         <svg
             class="mr-3 h-10 w-10 animate-spin text-white"
@@ -48,20 +49,23 @@
 
 {#each data.recommended.data as recommendation, i}
     <div
-        class="mb-4 grid grid-cols-2 rounded border border-gray-800"
+        class="p-20 hover:bg-slate-100/10 flex flex-col gap-20 bg-slate-100/5 rounded-2xl snap-always snap-center"
         id={`anime-${i}`}
     >
-        <h1 class="col-span-2 border-b border-gray-800 p-2">
+        <h1 class=" text-justify text-2xl decoration-dashed  hover:underline hover:decoration-sky-400 transition duration-700">
             {recommendation.content}
         </h1>
-        {#each recommendation.entry as subRecommendation}
-            <div class="mb-2 p-2">
-                <Anime
-                    title={subRecommendation.title}
-                    mal_id={subRecommendation.mal_id}
-                    image={subRecommendation.images.webp.image_url}
-                />
-            </div>
-        {/each}
+        <div class="grid grid-cols-2 place-items-center ">
+            {#each recommendation.entry as subRecommendation}
+                <div class="">
+                    <Anime
+                        title={subRecommendation.title}
+                        mal_id={subRecommendation.mal_id}
+                        image={subRecommendation.images.webp.image_url}
+                        favourite={false}
+                    />
+                </div>
+            {/each}
+        </div>
     </div>
 {/each}
