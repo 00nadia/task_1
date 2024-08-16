@@ -59,6 +59,8 @@ func main() {
 	e.GET("/favorites", func(c echo.Context) error {
 		return services.GetFavorites(c)
 	})
+	
+	e.POST("/add", services.Add)
 
 	slog.Info("HTTP server listening on", "port", system.HTTP_PORT)
 	err = e.Start(":" + system.HTTP_PORT)
