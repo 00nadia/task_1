@@ -19,7 +19,7 @@ export const load = (async () => {
         throw error(500, "Failed to load favorites from server");
     }
 
-    // You don't need else here, because if the request was successful, the function will return the data
+    // You don't need else here, because if the request was unsuccessful, the function will stop at the throw
     // There is now a very good trend, to keep the code as flat as possible, to avoid nesting
     // So you first try to handle all errors, exceptions, and then you go to the main logic
     console.log("Loaded favorites from server", go_server_favorites.data);
