@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import type { PageData } from "./$types";
     import Anime from "./anime.svelte";
-    import { gsap, ScrollTrigger } from "$lib/gsap";
+    import { ScrollTrigger } from "$lib/gsap";
 
     export let data: PageData;
     let loading = true;

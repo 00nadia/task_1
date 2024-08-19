@@ -3,31 +3,46 @@
     export let mal_id: number;
     export let image: string;
     export let favourite: boolean;
-    let src ='src/pin.svg';
+    let src = "src/pin.svg";
+
+    // You were missing format here
 </script>
-<div class="p-4 flow grid-flow-col place-items-center text-center snap-always snap-start">
-    {#if favourite!==true}
-    <h1 class="p-4 text-xl text-start text-balance hover:animate-pulse hover:text-sky-400 ">{title}</h1>
+
+<div
+    class="flow snap-start snap-always grid-flow-col place-items-center p-4 text-center"
+>
+    {#if favourite !== true}
+        <h1
+            class="text-balance p-4 text-start text-xl hover:animate-pulse hover:text-sky-400"
+        >
+            {title}
+        </h1>
     {/if}
     <a class="" href="/{mal_id}">
-        {#if favourite===true}
-            <div class="hover:scale-110 transition duration-700 "><img class="h-10 mx-24 rotate-90 -my-2 grayscale animate-pulse" {src} alt="pin"/>
-            <img
-            class="rounded-md rotate-6 hover:cursor-pointer hover:outline-dashed outline-offset-2 hover:outline-sky-400 shadow-xl shadow-sky-400/5"
-            src={image}
-            alt={title}
-            height="200px"
-            width="200px"
-            /></div>
-            
+        {#if favourite === true}
+            <div class="transition duration-700 hover:scale-110">
+                <img
+                    class="-my-2 mx-24 h-10 rotate-90 animate-pulse grayscale"
+                    {src}
+                    alt="pin"
+                />
+                <img
+                    class="rotate-6 rounded-md shadow-xl shadow-sky-400/5 outline-offset-2 hover:cursor-pointer hover:outline-dashed hover:outline-sky-400"
+                    src={image}
+                    alt={title}
+                    height="200px"
+                    width="200px"
+                />
+            </div>
         {:else}
-        <img
-            class="rounded-md transition duration-700 hover:scale-110 hover:cursor-pointer hover:outline-dashed outline-offset-2 hover:outline-sky-400 shadow-xl shadow-sky-400/5"
-            src={image}
-            alt={title}
-            height="200px"
-            width="200px"
-        />
+            <img
+                class="rounded-md shadow-xl shadow-sky-400/5 outline-offset-2 transition duration-700 hover:scale-110 hover:cursor-pointer hover:outline-dashed hover:outline-sky-400"
+                src={image}
+                alt={title}
+                height="200px"
+                width="200px"
+            />
         {/if}
     </a>
 </div>
+
