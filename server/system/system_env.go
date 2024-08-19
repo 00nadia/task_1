@@ -14,6 +14,6 @@ func mustHaveEnv(key string) string {
 }
 
 var (
-    LOG_LEVEL            = mustHaveEnv("LOG_LEVEL")
-	HTTP_PORT            = mustHaveEnv("HTTP_PORT")
+	LOG_LEVEL = mustHaveEnv("LOG_LEVEL")
+	HTTP_PORT = mustHaveEnv("HTTP_PORT")
 )

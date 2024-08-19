@@ -1,24 +1,29 @@
 import { SERVER_URL } from "$env/static/private";
-//import favorites from "$lib/data";
 import api from "$lib/server/api";
+import { error } from "@sveltejs/kit";
 import type { LayoutServerLoad } from "./$types";
-//import { json } from '@sveltejs/kit';
+
+type Favorite = {
+    id: number;
+    created: string;
+    updated: string;
+    title: string;
+    image: string;
+};
 
 export const load = (async () => {
-    const go_server_favorites = await api(SERVER_URL + "/favorites");
+    // You need to tell the ts what type the go_server_favorites is, because it can't infer it from the api function
+    const go_server_favorites = await api<Favorite[]>(SERVER_URL + "/favorites");
     if (!go_server_favorites.success) {
-        console.error(
-            "Failed to load favorites from server",
-            go_server_favorites.error,
-        );
-        return null;
-    } else {
-        console.log("Loaded favorites from server", go_server_favorites.data);
-        return {
-            favorites: go_server_favorites.data,
-        };
+        // error is a special function that will redirect the user to the closest +error.svelte page
+        throw error(500, "Failed to load favorites from server");
     }
 
-   
-
+    // You don't need else here, because if the request was successful, the function will return the data
+    // There is now a very good trend, to keep the code as flat as possible, to avoid nesting
+    // So you first try to handle all errors, exceptions, and then you go to the main logic
+    console.log("Loaded favorites from server", go_server_favorites.data);
+    return {
+        favorites: go_server_favorites.data,
+    };
 }) satisfies LayoutServerLoad;
