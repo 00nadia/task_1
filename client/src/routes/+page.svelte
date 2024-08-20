@@ -23,7 +23,6 @@
         }
         loading = false;
     });
-
 </script>
 
 {#if loading}
@@ -49,13 +48,15 @@
 
 {#each data.recommended.data as recommendation, i}
     <div
-        class="p-20 hover:bg-slate-100/10 flex flex-col gap-20 bg-slate-100/5 rounded-2xl snap-always snap-center"
+        class="flex snap-center snap-always flex-col gap-20 rounded-2xl bg-slate-100/5 p-20 hover:bg-slate-100/10"
         id={`anime-${i}`}
     >
-        <h1 class=" text-justify text-2xl decoration-dashed  hover:underline hover:decoration-sky-400 transition duration-700">
+        <h1
+            class=" text-justify text-2xl decoration-dashed transition duration-700 hover:underline hover:decoration-sky-400"
+        >
             {recommendation.content}
         </h1>
-        <div class="grid grid-cols-2 place-items-center ">
+        <div class="grid grid-cols-2 place-items-center">
             {#each recommendation.entry as subRecommendation}
                 <div class="">
                     <Anime

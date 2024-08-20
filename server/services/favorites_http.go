@@ -19,7 +19,7 @@ func GetFavorites(c echo.Context) error {
 
 func Add(c echo.Context) error {
 	slog.Info("Adding favorites")
-    // So you need NewFav struct here....i wonder what you are sending from the client
+	// So you need NewFav struct here....i wonder what you are sending from the client
 	data := NewFav{}
 	err := c.Bind(&data)
 	if err != nil {
@@ -34,14 +34,18 @@ func Add(c echo.Context) error {
 	return c.JSON(http.StatusCreated, newData)
 }
 
-// func Delete(c echo.Context) error {
-//     slog.Info("deleting fav")
-//     id := c.Param("mal_id")
-//     err := deleteFav(id)
-//     if err != nil {
-//         slog.Error("Error deleting favorites")
-//         return c.String(500, "Error deleting favorites")
-//     }
-//     return err
-
-// }
+func Delete(c echo.Context) error {
+	slog.Info("deleting fav")
+	data := NewFav{}
+	err := c.Bind(&data)
+	if err != nil {
+		slog.Error("Error binding data", "error", err)
+		return err
+	}
+	err = deleteFav(data)
+	if err != nil {
+		slog.Error("Error adding favorites", "error", err)
+		return c.JSON(http.StatusInternalServerError, err.Error())
+	}
+	return c.JSON(http.StatusCreated, nil)
+}

@@ -61,6 +61,7 @@ func main() {
 	})
 
 	e.POST("/add", services.Add)
+	e.DELETE("/delete", services.Delete)
 
 	slog.Info("HTTP server listening on", "port", system.HTTP_PORT)
 	err = e.Start(":" + system.HTTP_PORT)
