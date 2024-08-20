@@ -10,6 +10,7 @@
     <div
         class="col-start-1 col-end-5 grid h-screen snap-y snap-mandatory gap-x-12 gap-y-96 overflow-y-scroll p-4 scrollbar-hide sm:grid-cols-1 2xl:grid-cols-2"
     >
+        <h1>Anime list</h1>
         <slot />
     </div>
     <div
