@@ -1,9 +1,18 @@
 <script lang="ts">
     import { enhance } from "$app/forms";
     import Anime from "../anime.svelte";
-    import type { PageData } from "./$types";
+    import type { ActionData, PageData } from "./$types";
 
     export let data: PageData;
+    export let form: ActionData;
+
+    if (form?.success === false) {
+        console.log(form.msg);
+        // show error toast
+    } else if (form?.success === true) {
+        console.log(form.msg);
+        // show success toast
+    }
 </script>
 
 <div
