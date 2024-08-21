@@ -64,5 +64,5 @@ func deleteFav(data NewFav) error {
 	if err != nil {
 		return err
 	}
-	return err
+	return nil
 }

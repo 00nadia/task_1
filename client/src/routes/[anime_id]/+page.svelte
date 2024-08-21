@@ -1,13 +1,29 @@
 <script lang="ts">
     import { enhance } from "$app/forms";
     import Anime from "../anime.svelte";
-    import type { PageData } from "./$types";
+    import Toasts from "../toasts.svelte";
+    import type { ActionData, PageData } from "./$types";
+    import { addToast } from "$lib/toast";
 
     export let data: PageData;
+
+   // let success: boolean, message: string;
+    
+    export let form: ActionData;
+    if (form?.success === false) {
+        console.log(form.msg);
+        // show error toast
+    } else if (form?.success === true) {
+        console.log(form.msg);
+        // show success toast
+    }
+    console.log("form: ", form);
 </script>
 
+<Toasts />
+
 <div
-    class="col-start-1 col-end-3 flex flex-col content-center items-center rounded-2xl bg-slate-100/5"
+    class="col-start-1 col-end-3 flex h-screen flex-col content-center items-center rounded-2xl bg-slate-100/5"
 >
     <Anime
         favourite={false}
@@ -22,7 +38,11 @@
     <div
         class="grid h-24 grid-cols-3 place-content-center place-items-center self-stretch p-1"
     >
-        <form action="?/addToFavorites" method="post" use:enhance>
+        <form
+            action="?/addToFavorites"
+            method="post"
+            use:enhance={() => addToast({ success, message })}
+        >
             <input type="hidden" name="mal_id" value={data.anime.mal_id} />
             <input type="hidden" name="title" value={data.anime.title} />
             <input
@@ -37,7 +57,11 @@
                 Add to favorites
             </button>
         </form>
-        <form action="?/delete" method="post" use:enhance>
+        <form
+            action="?/delete"
+            method="post"
+            use:enhance={() => addToast({ success, message })}
+        >
             <input type="hidden" name="mal_id" value={data.anime.mal_id} />
             <button
                 class="relative rounded-3xl bg-neutral-100 p-4 font-bold text-sky-600 shadow-lg shadow-sky-600/50 ring-4 ring-sky-600/50 ring-offset-2 ring-offset-slate-900 transition duration-700 hover:bg-sky-600 hover:text-neutral-100 hover:shadow-neutral-100 hover:ring-neutral-100"

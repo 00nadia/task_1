@@ -27,7 +27,7 @@ export type AddData = {
 };
 export type DeleteData = {
     id: number;
-}
+};
 
 export const load = (async ({ params }) => {
     const id = params.anime_id;
@@ -59,9 +59,9 @@ export const actions = {
         });
         if (!data.success) {
             console.error("failed to validate form", data.error);
-            return { success: false };
+            return { success: false, msg: "Failed to validate form" };
         }
-        const addAnime = await api<AddData>( SERVER_URL + "/add", {
+        const addAnime = await api<AddData>(SERVER_URL + "/add", {
             method: "POST",
             // So now after parsing schema, the data.data have a proper type
             // Here is a bug, but i will not tell you what it is :D
@@ -70,10 +70,10 @@ export const actions = {
 
         if (!addAnime.success) {
             console.error("failed to add new data", addAnime.error);
-        } else {
-            console.log("added data to favorites");
+            return { success: false, msg: "Failed to add new data" };
         }
-        return { success: true };
+        console.log("added data to favorites");
+        return { success: true, msg: "Added to favorites" };
     },
     delete: async ({ request }) => {
         const form = await request.formData();
@@ -85,18 +85,17 @@ export const actions = {
             id: form.get("mal_id"),
         });
         if (!data.success) {
-            console.error("failed to validate form", data.error);
-            return { success: false };
+            console.error("Failed to validate form", data.error);
+            return { success: false, msg: "Failed to validate form" };
         }
-        const deleteAnime = await api <DeleteData>(SERVER_URL + "/delete", {
+        const deleteAnime = await api<DeleteData>(SERVER_URL + "/delete", {
             method: "DELETE",
             body: data.data,
         });
         if (!deleteAnime.success) {
-            console.error("failed to add new data", deleteAnime.error);
-        } else {
-            console.log("added data to favorites");
+            console.error("Failed to delete data", deleteAnime.error);
+            return { success: false, msg: "Failed to delete data" };
         }
-        return { success: true };
+        return { success: true, msg: "Deleted from favorites" };
     },
 } satisfies Actions;

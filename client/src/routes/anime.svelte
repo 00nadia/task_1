@@ -27,16 +27,20 @@
                     alt="pin"
                 />
                 <img
-                    class="rotate-6 rounded-md shadow-xl shadow-sky-400/5 outline-offset-2 hover:cursor-pointer hover:outline-dashed hover:outline-sky-400 md:h-[200px] xl:h-[250px]"
+                    class="rotate-6 rounded-md shadow-xl shadow-sky-400/5 outline-offset-2 hover:cursor-pointer hover:outline-dashed hover:outline-sky-400"
                     src={image}
                     alt={title}
+                    width="200px"
+                    height="200px"
                 />
             </div>
         {:else}
             <img
-                class="rounded-md shadow-xl shadow-sky-400/5 outline-offset-2 transition duration-700 hover:scale-110 hover:cursor-pointer hover:outline-dashed hover:outline-sky-400 md:h-[200px] xl:h-[250px]"
+                class="rounded-md shadow-xl shadow-sky-400/5 outline-offset-2 transition duration-700 hover:scale-110 hover:cursor-pointer hover:outline-dashed hover:outline-sky-400"
                 src={image}
                 alt={title}
+                width="200px"
+                height="200px"
             />
         {/if}
     </a>
