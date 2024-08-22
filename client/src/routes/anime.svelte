@@ -30,8 +30,8 @@
                     class="rotate-6 rounded-md shadow-xl shadow-sky-400/5 outline-offset-2 hover:cursor-pointer hover:outline-dashed hover:outline-sky-400"
                     src={image}
                     alt={title}
-                    height="200px"
                     width="200px"
+                    height="200px"
                 />
             </div>
         {:else}
@@ -39,10 +39,9 @@
                 class="rounded-md shadow-xl shadow-sky-400/5 outline-offset-2 transition duration-700 hover:scale-110 hover:cursor-pointer hover:outline-dashed hover:outline-sky-400"
                 src={image}
                 alt={title}
-                height="200px"
                 width="200px"
+                height="200px"
             />
         {/if}
     </a>
 </div>
-

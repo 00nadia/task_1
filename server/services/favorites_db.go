@@ -14,9 +14,9 @@ type Favorite struct {
 }
 
 type NewFav struct {
-	FavID    int    `json:"favid"`
-	FavTitle string `json:"favtitle"`
-	FavImage string `json:"favimage"`
+	FavID    int    `json:"id"`
+	FavTitle string `json:"title"`
+	FavImage string `json:"image"`
 }
 
 func dest(fav *Favorite) []interface{} {
@@ -49,22 +49,20 @@ func selectAllFavorites() ([]Favorite, error) {
 }
 
 func insertFav(data NewFav) (NewFav, error) {
-    // It's much better to use a fmt.Sprintf here, cos it checks the parameters
-    query := fmt.Sprintf("insert into favorites (id, title, image) values (%d, '%s', '%s');", data.FavID, data.FavTitle, data.FavImage)
-	_, err := system.Db.Query(query)
+	// It's much better to use a fmt.Sprintf here, cos it checks the parameters
+	query := fmt.Sprintf("insert into favorites (id, title, image) values (%d, '%s', '%s');", data.FavID, data.FavTitle, data.FavImage)
+	_, err := system.Db.Exec(query)
 	if err != nil {
 		return data, err
 	}
 	return data, nil
 }
 
-// func deleteFav(id int) (error){
-//     delete := `
-//     delete from favorites
-//     where id = $1 ;`
-//     _, err := system.Db.Query(delete, id)
-//     if err != nil {
-//         return  err
-//     }
-//     return  err
-// }
+func deleteFav(data NewFav) error {
+	query := fmt.Sprintf("delete from favorites where id = %d ;", data.FavID)
+	_, err := system.Db.Exec(query)
+	if err != nil {
+		return err
+	}
+	return nil
+}

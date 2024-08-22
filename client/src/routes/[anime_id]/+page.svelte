@@ -1,10 +1,23 @@
 <script lang="ts">
     import { enhance } from "$app/forms";
+    import { addToast } from "$lib/toast";
     import Anime from "../anime.svelte";
-    import type { PageData } from "./$types";
+    import Toasts from "../toasts.svelte";
+    import type { ActionData, PageData } from "./$types";
 
     export let data: PageData;
+    export let form: ActionData;
+
+    $: if (form) {
+        if (form.success) {
+            addToast({ success: true, message: form.msg });
+        } else {
+            addToast({ success: false, message: form.msg });
+        }
+    }
 </script>
+
+<Toasts />
 
 <div
     class="col-start-1 col-end-3 flex h-screen flex-col content-center items-center rounded-2xl bg-slate-100/5"
@@ -16,11 +29,11 @@
         image={data.anime.images.webp.image_url}
     />
 
-    <p class="gap-12 sm:p-5 sm:text-sm md:p-10 md:text-base xl:text-xl">
+    <p class="gap-12 sm:p-5 md:p-4 md:text-sm xl:text-xl">
         {data.anime.synopsis}
     </p>
     <div
-        class="grid h-24 grid-cols-3 place-content-center place-items-center self-stretch p-5"
+        class="grid h-24 grid-cols-3 place-content-center place-items-center self-stretch p-1"
     >
         <form action="?/addToFavorites" method="post" use:enhance>
             <input type="hidden" name="mal_id" value={data.anime.mal_id} />
@@ -57,4 +70,3 @@
         </div>
     </div>
 </div>
-
