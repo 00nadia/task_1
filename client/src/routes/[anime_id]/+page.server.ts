@@ -86,7 +86,7 @@ export const actions = {
         });
         if (!data.success) {
             console.error("Failed to validate form", data.error);
-            return { success: false, msg: "Failed to validate form" };
+            return { success: false, msg: "failed to validate form" };
         }
         const deleteAnime = await api<DeleteData>(SERVER_URL + "/delete", {
             method: "DELETE",
