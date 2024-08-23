@@ -21,29 +21,36 @@
         <slot />
     </div>
     <button
-        class="absolute right-2 top-2 rounded-full bg-sky-400 p-2 font-bold text-slate-900"
+        class="absolute right-6 top-2 rounded-full bg-sky-400 p-2 font-bold text-slate-900"
         on:click={openDrawer}
     >
         Show favorites
     </button>
     {#if isDrawerOpen}
-        <button
-            class="absolute z-20 right-2 top-2 rounded-full bg-sky-400 p-2 font-bold text-slate-900"
-            on:click={closeDrawer}
-        >
-            close
-        </button>
-        <div
-            class="scrollbar-hide absolute right-0 top-0 z-10 grid h-screen w-80 snap-y snap-mandatory grid-cols-1 content-start justify-items-center gap-1 gap-y-20 overflow-y-scroll rounded-2xl bg-slate-700"
-        >
-            {#each data.favorites as fav}
-                <Anime
-                    title={fav.title}
-                    mal_id={fav.id}
-                    image={fav.image}
-                    favourite={true}
-                />
-            {/each}
+        <div class="relative z-10">
+            <div
+                class="fixed inset-0 bg-slate-950/60 transition-opacity"
+                on:click={closeDrawer}
+                aria-hidden="true"
+            ></div>
+            <button
+                class="fixed right-2 top-2 z-20 rounded-full bg-sky-400 p-2 font-bold text-slate-900"
+                on:click={closeDrawer}
+            >
+                close
+            </button>
+            <div
+                class="scrollbar-hide fixed inset-y-0 right-0 z-10 grid h-screen w-80 snap-y snap-mandatory grid-cols-1 content-start justify-items-center gap-1 gap-y-20 overflow-y-scroll rounded-2xl bg-slate-700"
+            >
+                {#each data.favorites as fav}
+                    <Anime
+                        title={fav.title}
+                        mal_id={fav.id}
+                        image={fav.image}
+                        favourite={true}
+                    />
+                {/each}
+            </div>
         </div>
     {/if}
 </div>
