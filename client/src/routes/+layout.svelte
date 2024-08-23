@@ -2,6 +2,7 @@
     import "../app.css";
     import type { LayoutData } from "./$types";
     import Anime from "./anime.svelte";
+    import { trapFocus } from "$lib/focus";
     let isDrawerOpen = false;
     const openDrawer = () => {
         isDrawerOpen = true;
@@ -27,20 +28,25 @@
         Show favorites
     </button>
     {#if isDrawerOpen}
-        <div class="relative z-10">
+        <div
+            class="absolute z-10"
+            role="dialog"
+            aria-modal="true"
+            use:trapFocus
+        >
             <div
                 class="fixed inset-0 bg-slate-950/60 transition-opacity"
                 on:click={closeDrawer}
                 aria-hidden="true"
             ></div>
             <button
-                class="fixed right-2 top-2 z-20 rounded-full bg-sky-400 p-2 font-bold text-slate-900"
+                class="fixed right-6 top-2 z-20 rounded-full bg-sky-400 p-2 font-bold text-slate-900"
                 on:click={closeDrawer}
             >
-                close
+                Close favorites
             </button>
             <div
-                class="scrollbar-hide fixed inset-y-0 right-0 z-10 grid h-screen w-80 snap-y snap-mandatory grid-cols-1 content-start justify-items-center gap-1 gap-y-20 overflow-y-scroll rounded-2xl bg-slate-700"
+                class="scrollbar-hide fixed inset-y-0 right-0 z-10 grid h-screen w-80 snap-y snap-mandatory grid-cols-1 content-start justify-items-center gap-1 gap-y-20 overflow-y-scroll rounded-2xl bg-slate-700 pt-7"
             >
                 {#each data.favorites as fav}
                     <Anime
