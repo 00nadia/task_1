@@ -3,6 +3,7 @@
     import type { LayoutData } from "./$types";
     import Anime from "./anime.svelte";
     import { trapFocus } from "$lib/focus";
+    import { slide } from "svelte/transition";
 
     let isDrawerOpen = false;
     const openDrawer = () => {
@@ -34,6 +35,7 @@
             role="dialog"
             aria-modal="true"
             use:trapFocus
+            transition:slide
         >
             <div
                 class="fixed inset-0 bg-slate-950/60 transition-opacity"
