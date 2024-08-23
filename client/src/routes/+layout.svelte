@@ -3,6 +3,7 @@
     import type { LayoutData } from "./$types";
     import Anime from "./anime.svelte";
     import { trapFocus } from "$lib/focus";
+
     let isDrawerOpen = false;
     const openDrawer = () => {
         isDrawerOpen = true;

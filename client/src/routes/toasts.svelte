@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import Toast from "./toast.svelte";
     import { dismissToast, toasts } from "../lib/toast";
 </script>
